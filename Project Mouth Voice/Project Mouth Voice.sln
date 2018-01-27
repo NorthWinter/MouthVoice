@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project Mouth Voice", "Project Mouth Voice.csproj", "{760A0898-ADDA-A130-80A0-1B347541A37B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{760A0898-ADDA-A130-80A0-1B347541A37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760A0898-ADDA-A130-80A0-1B347541A37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760A0898-ADDA-A130-80A0-1B347541A37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760A0898-ADDA-A130-80A0-1B347541A37B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
