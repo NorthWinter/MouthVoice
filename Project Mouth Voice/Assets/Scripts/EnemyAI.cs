@@ -17,9 +17,14 @@ public class EnemyAI : MonoBehaviour {
 	private float moveTimer;
 	private Vector2 startLocation;
 
+	[SerializeField] private AudioSource hitSound;
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
 		startLocation = transform.position;
+
+		animator = GetComponent<Animator>();
 		StartCoroutine(AI());
 	}
 	
@@ -28,6 +33,9 @@ public class EnemyAI : MonoBehaviour {
 			Debug.DrawLine((transform.position + (Vector3)moveVector / 4), (transform.position + 5 * (Vector3)moveVector / 4));
 			switch (curMode) {
 				case Mode.Move:
+					if(moveTimer == 0f) {
+						animator.Play("Move");
+					}
 					moveTimer += Time.deltaTime;
 					transform.position = startLocation + (moveVector * moveCurve.Evaluate(moveTimer));
 					if(moveTimer >= moveCurve.keys[1].time) {
@@ -42,6 +50,7 @@ public class EnemyAI : MonoBehaviour {
 					yield return null;
 					break;
 				case Mode.Turn:
+					animator.Play("Idle");
 					curAngle += turnAngle;
 					moveVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * curAngle), Mathf.Sin(Mathf.Deg2Rad * curAngle));
 					GetComponent<SpriteRenderer>().flipX = moveVector.x < 0;
@@ -62,7 +71,7 @@ public class EnemyAI : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if(collision.gameObject.GetComponent<PlayerController>()) {
 			collision.gameObject.GetComponent<PlayerController>().PlayerHit(damageOnHit);
-			GetComponent<AudioSource>().Play();
+			hitSound.Play();
 		}
 	}
 }
