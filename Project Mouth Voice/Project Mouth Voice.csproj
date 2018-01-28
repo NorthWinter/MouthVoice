@@ -285,10 +285,12 @@
     <Compile Include="Assets\Scripts\ButtonSelect.cs" />
     <Compile Include="Assets\Scripts\CameraEffects.cs" />
     <Compile Include="Assets\Scripts\ColorOnStart.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\EnergySlider.cs" />
     <Compile Include="Assets\Scripts\MazeManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Switch\FinalSwitch.cs" />
+    <Compile Include="Assets\Scripts\Switch\MoveWallsSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\RotateSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\Switch.cs" />
     <Compile Include="Assets\Scripts\Switch\TeleportSwitch.cs" />
