@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TeleportSwitch : Switch {
 
-	[SerializeField] private Transform teleportLocation;
+	[SerializeField] private GameObject teleportLocations;
 	[SerializeField] private AudioClip teleportSound;
 
 	protected override void SwitchEffect() {
@@ -14,8 +14,15 @@ public class TeleportSwitch : Switch {
 
 		mazeAudio.clip = teleportSound;
 		mazeAudio.Play();
-		player.transform.position = teleportLocation.position;
+		player.transform.position = RandomLocation();
 		CameraEffects.FadeOut();
 		EndSwitch();
+	}
+
+	protected Vector2 RandomLocation() {
+		BoxCollider2D chosenLocationBox = teleportLocations.GetComponents<BoxCollider2D>()[Random.Range(0, teleportLocations.GetComponents<BoxCollider2D>().Length)];
+		float xPos = Random.Range(chosenLocationBox.offset.x - chosenLocationBox.size.x / 2, chosenLocationBox.offset.x + chosenLocationBox.size.x / 2);
+		float yPos = Random.Range(chosenLocationBox.offset.y - chosenLocationBox.size.y / 2, chosenLocationBox.offset.y + chosenLocationBox.size.y / 2);
+		return new Vector2(xPos, yPos);
 	}
 }
