@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
 
-	private enum Mode { Move, Turn, Scan}
-	private Mode curMode = Mode.Scan;
+	private enum Mode { Move, Turn }
+	private Mode curMode = Mode.Move;
 
 	[SerializeField] private float damageOnHit;
+	[SerializeField] private float turnTime;
 	[SerializeField] private float turnAngle;
+	private float curAngle;
+	private Vector2 moveVector = Vector2.right;
 	[SerializeField] private AnimationCurve moveCurve;
 	[SerializeField] private LayerMask detectionMask;
 	private float moveTimer;
@@ -22,30 +25,32 @@ public class EnemyAI : MonoBehaviour {
 	
 	private IEnumerator AI() {
 		do {
-			Debug.DrawLine((transform.position + transform.right / 4), (transform.position + 5 * transform.right / 4));
+			Debug.DrawLine((transform.position + (Vector3)moveVector / 4), (transform.position + 5 * (Vector3)moveVector / 4));
 			switch (curMode) {
 				case Mode.Move:
 					moveTimer += Time.deltaTime;
-					transform.position = startLocation + (Vector2)(transform.right * moveCurve.Evaluate(moveTimer));
+					transform.position = startLocation + (moveVector * moveCurve.Evaluate(moveTimer));
 					if(moveTimer >= moveCurve.keys[1].time) {
-						curMode = Mode.Scan;
+						if (Physics2D.Linecast((transform.position + (Vector3)moveVector / 4), (transform.position + 5 * (Vector3)moveVector / 4), detectionMask)) {
+							curMode = Mode.Turn;
+						} else {
+							curMode = Mode.Move;
+						}
 						moveTimer = 0f;
 						startLocation = transform.position;
 					}
 					yield return null;
 					break;
 				case Mode.Turn:
-					transform.Rotate(0, 0, turnAngle);
-					curMode = Mode.Scan;
-					yield return new WaitForSeconds(moveCurve.keys[1].time);
-					break;
-				case Mode.Scan:
-					if(Physics2D.Linecast((transform.position + transform.right / 4), (transform.position + 5 * transform.right / 4), detectionMask)){
+					curAngle += turnAngle;
+					moveVector = new Vector2(Mathf.Cos(Mathf.Deg2Rad * curAngle), Mathf.Sin(Mathf.Deg2Rad * curAngle));
+					GetComponent<SpriteRenderer>().flipX = moveVector.x < 0;
+					if (Physics2D.Linecast((transform.position + (Vector3)moveVector / 4), (transform.position + 5 * (Vector3)moveVector / 4), detectionMask)) {
 						curMode = Mode.Turn;
 					} else {
 						curMode = Mode.Move;
 					}
-					yield return null;
+					yield return new WaitForSeconds(turnTime);
 					break;
 				default:
 					yield return null;
@@ -57,6 +62,7 @@ public class EnemyAI : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if(collision.gameObject.GetComponent<PlayerController>()) {
 			collision.gameObject.GetComponent<PlayerController>().PlayerHit(damageOnHit);
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }
