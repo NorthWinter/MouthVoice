@@ -26,7 +26,7 @@ public class Switch : MonoBehaviour {
 	}
 
 	virtual protected void SwitchEffect() {
-		MazeManager.instance.GetComponent<AudioSource>().Play();
+		//MazeManager.instance.GetComponent<AudioSource>().Play();
 	}
 
 	protected void EndSwitch() {

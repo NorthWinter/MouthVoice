@@ -45,3 +45,6 @@ TagManager:
   - name: Maze Wall
     uniqueID: 347635655
     locked: 0
+  - name: Darkener
+    uniqueID: 3994621837
+    locked: 0
