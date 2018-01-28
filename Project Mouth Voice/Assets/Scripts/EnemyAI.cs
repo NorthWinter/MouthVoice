@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour {
 
 	[SerializeField] private float damageOnHit;
 	[SerializeField] private float turnTime;
-	[SerializeField] private float turnAngle;
+	[SerializeField] protected float turnAngle;
 	private float curAngle;
 	private Vector2 moveVector = Vector2.right;
 	[SerializeField] private AnimationCurve moveCurve;

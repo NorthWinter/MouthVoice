@@ -6,6 +6,8 @@ public class Switch : MonoBehaviour {
 
 	protected PlayerController player;
 
+	[SerializeField] protected Sprite activeSprite;
+
 	private void OnEnable() {
 		CameraEffects.FadeInComplete += SwitchEffect;
 		player = FindObjectOfType<PlayerController>();
@@ -21,6 +23,7 @@ public class Switch : MonoBehaviour {
 		if(GetComponent<AudioSource>() != null) {
 			GetComponent<AudioSource>().Play();
 		}
+		GetComponentInChildren<SpriteRenderer>().sprite = activeSprite;
 		CameraEffects.FadeIn();
 		player.enabled = false;
 	}
@@ -32,7 +35,8 @@ public class Switch : MonoBehaviour {
 	protected void EndSwitch() {
 		MazeManager.NextSwitch();
 		player.enabled = true;
-		Destroy(gameObject);
+
+		Destroy(this);
 	}
 
 	protected void OnDisable() {

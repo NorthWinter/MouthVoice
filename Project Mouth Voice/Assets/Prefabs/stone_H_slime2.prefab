@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212257377305672834}
   - component: {fileID: 61708056773141190}
   - component: {fileID: 50257385090339290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: stone_H_slime2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212730889981992482}
   - component: {fileID: 61774106572892318}
   - component: {fileID: 50903331884301704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: stone_upR_slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}

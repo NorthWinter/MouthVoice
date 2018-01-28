@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212996355832037784}
   - component: {fileID: 61510075654593784}
   - component: {fileID: 50569919054686568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: move_bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,7 +16,7 @@ public class MoveWallsSwitch : Switch {
 		mazeAudio.Play();
 
 		foreach (GameObject wall in wallsToMove) {
-			wall.transform.Translate(Vector2.up);
+			wall.transform.Translate(Vector2.up * 4);
 		}
 		CameraEffects.FadeOut();
 		EndSwitch();
