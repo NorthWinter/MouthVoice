@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 	private SpriteRenderer sprite;
 
 	private bool isDamaged = false;
+	private bool isIdle = false;
 
 	private void Awake() {
 		body = GetComponent<Rigidbody2D>();
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 			enabled = false;
 		}
 		if(body.velocity.magnitude > .1f) {
+			isIdle = false;
 			energy -= body.velocity.magnitude / speed * Time.deltaTime;
 			walkSoundTimer += Time.deltaTime * (body.velocity.magnitude / speed);
 			if (walkSoundTimer >= .3f) {
@@ -59,8 +61,9 @@ public class PlayerController : MonoBehaviour {
 				walkSoundSource.Stop();
 			}
 			walkSoundTimer = 1f;
-			if (!isDamaged) {
+			if (!isDamaged && !isIdle) {
 				animator.Play("Idle");
+				isIdle = true;
 			}
 		}
 	}
@@ -86,6 +89,7 @@ public class PlayerController : MonoBehaviour {
 	public void PlayerHit(float damage) {
 		energy -= damage;
 		body.velocity = Vector2.zero;
+		isIdle = false;
 		StartCoroutine(Damaged());
 		GetComponent<Animator>().Play("Hit");
 	}
