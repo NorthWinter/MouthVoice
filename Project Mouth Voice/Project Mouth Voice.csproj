@@ -295,6 +295,7 @@
     <Compile Include="Assets\Scripts\Switch\FinalSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\MonsterSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\MoveWallsSwitch.cs" />
+    <Compile Include="Assets\Scripts\Switch\OpenGateSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\RotateSwitch.cs" />
     <Compile Include="Assets\Scripts\Switch\Switch.cs" />
     <Compile Include="Assets\Scripts\Switch\TeleportSwitch.cs" />
